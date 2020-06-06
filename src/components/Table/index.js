@@ -36,7 +36,7 @@ function Table() {
     },
   ];
   return (
-    <table class="uk-table uk-table-hover uk-table-divider">
+    <table className="uk-table uk-table-hover uk-table-divider">
       <thead>
         <tr>
           <th>Name</th>
@@ -53,6 +53,7 @@ function Table() {
               email={employee.email}
               position={employee.position}
               number={employee.number}
+              key={employee.email}
             />
           );
         })}
