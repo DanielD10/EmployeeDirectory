@@ -11,14 +11,11 @@ function Header() {
 
 
         <div className="uk-navbar-item">
-            <div>Filter</div>
+            <div>sort</div>
         </div>
 
         <div className="uk-navbar-item">
-            <form>
-                <input className="uk-input uk-form-width-small" type="text" placeholder="Input"/>
-                <button className="uk-button uk-button-default">Button</button>
-            </form>
+           
         </div>
 
     </div>

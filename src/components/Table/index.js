@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState, useRef } from "react";
 import "./style.css";
 import TableRow from "../TableRow";
 
@@ -36,33 +36,59 @@ function Table() {
     },
   ];
 
-  const [currentEmployees,setCurrentEmployees]= useState(employees);
-
+  const [currentEmployees, setCurrentEmployees] = useState(employees);
+  function sortEmail() {
+    const newEmployees = [...employees];
+    newEmployees.sort((a, b) => (a.email > b.email ? 1 : -1));
+    setCurrentEmployees(newEmployees);
+  }
+  const nameRef = useRef();
+  function filterName(e){
+      e.preventDefault();
+    const name = nameRef.current.value;
+    const newEmployees = employees.filter(function(item){
+        return item.name.includes(name)
+    })
+    setCurrentEmployees(newEmployees)
+  }
 
   return (
-    <table className="uk-table uk-table-hover uk-table-divider">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Position</th>
-          <th>Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        {currentEmployees.map((employee) => {
-          return (
-            <TableRow
-              name={employee.name}
-              email={employee.email}
-              position={employee.position}
-              number={employee.number}
-              key={employee.email}
-            />
-          );
-        })}
-      </tbody>
-    </table>
+    <div>
+      <form>
+        <input
+          className="uk-input uk-form-width-small"
+          type="text"
+          placeholder="Input"
+          ref={nameRef}
+        />
+        <button className="uk-button uk-button-default" onClick={filterName}>Button</button>
+      </form>
+      <table className="uk-table uk-table-hover uk-table-divider">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>
+              <button onClick={sortEmail}>Email</button>
+            </th>
+            <th>Position</th>
+            <th>Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentEmployees.map((employee) => {
+            return (
+              <TableRow
+                name={employee.name}
+                email={employee.email}
+                position={employee.position}
+                number={employee.number}
+                key={employee.email}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
