@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./style.css";
 import TableRow from "../TableRow";
 
@@ -35,6 +35,10 @@ function Table() {
       number: "956-333-888",
     },
   ];
+
+  const [currentEmployees,setCurrentEmployees]= useState(employees);
+
+
   return (
     <table className="uk-table uk-table-hover uk-table-divider">
       <thead>
@@ -46,7 +50,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {employees.map((employee) => {
+        {currentEmployees.map((employee) => {
           return (
             <TableRow
               name={employee.name}
